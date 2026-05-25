@@ -5,3 +5,4 @@ edition = "2024"
 authors = ["Patrick Tabarelli <patrick.tabarelli@gmail.com>"]
 
 [dependencies]
+rayon = "1.12.0"

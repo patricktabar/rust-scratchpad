@@ -1,18 +1,20 @@
 # rust-scratchpad
 
-A personal sandbox for experimenting with Rust language features, patterns, and standard library APIs. No external dependencies — everything is built on Rust's stdlib.
+A personal sandbox for experimenting with Rust language features, patterns, and standard library APIs. Uses only the Rust standard library with one exception — the `rayon` crate for data parallelism.
 
 ## Project Structure
 
 ```
 rust-scratchpad/
-├── Cargo.toml           # Package manifest (edition 2024, no dependencies)
+├── Cargo.toml           # Package manifest (edition 2024, depends on `rayon`)
 ├── config.txt           # Sample file used by the file_io example
 ├── src/
 │   └── lib.rs           # Library crate root (currently empty)
 └── examples/
     ├── concurrency_and_shared_state.rs
     ├── file_io_and_error_handling.rs
+    ├── iterators.rs
+    ├── parallelism.rs
     └── secure_file_uploader.rs
 ```
 
@@ -24,6 +26,8 @@ Each example is a standalone binary you can run with `cargo run --example <name>
 |---|---|---|
 | `concurrency_and_shared_state` | Multi-threading | `Arc`, `Mutex`, `mpsc` channels, thread spawning, error handling across threads |
 | `file_io_and_error_handling` | File I/O | `File` / `BufReader`, custom `Result` aliases, `Box<dyn Error>`, line-by-line reading |
+| `iterators` | Iterator chaining | `filter_map`, `map`, `filter`, `collect`, directory traversal with `read_dir` |
+| `parallelism` | Data parallelism | `rayon::par_iter`, parallel map, hash computation in parallel |
 | `secure_file_uploader` | Type-safe state machines | Phantom types, compile-time state transitions (`Pending → Validated \| Failed`), the type-state pattern in Rust |
 
 ## Usage
@@ -42,6 +46,12 @@ cargo run --example concurrency_and_shared_state
 
 # Reads config.txt and prints each line
 cargo run --example file_io_and_error_handling
+
+# Iterator chaining to filter and transform directory entries
+cargo run --example iterators
+
+# Computes hashes in parallel using the Rayon crate
+cargo run --example parallelism
 
 # Simulates a file upload workflow with compile-time state guarantees
 cargo run --example secure_file_uploader

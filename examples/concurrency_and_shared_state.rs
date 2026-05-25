@@ -1,8 +1,11 @@
 /// This example demonstrates how to use Arc and Mutex for shared state across threads,
 /// and how to use channels for communication between threads.
 
-use std::{sync::{Arc, Mutex, mpsc}, thread};
+use std::sync::{Arc, Mutex, mpsc};
+use std::thread;
 use std::time::Duration;
+
+type ThreadResult = Result<(), Box<dyn std::error::Error + Send + Sync>>;
 
 fn main() {
     // Shared state using Arc and Mutex
@@ -15,13 +18,14 @@ fn main() {
         let counter_clone = counter.clone();
         let sender_clone = tx.clone();
 
-        thread::spawn(move || {
-            let mut num = counter_clone.lock().unwrap();
+        thread::spawn(move || -> ThreadResult {
+            let mut num = counter_clone.lock().map_err(|e| format!("Failed to lock mutex: {}", e))?;
             *num += 1;
 
             sender_clone.send(format!("Thread {} finished. Current count: {}", i, *num)).unwrap();
 
             thread::sleep(Duration::from_millis(100));
+            Ok(())
         });
     }
 
@@ -32,5 +36,8 @@ fn main() {
         println!("Main received: {}", message);
     }
 
-    println!("Final shared count: {}", *counter.lock().unwrap());
+    match counter.lock() {
+        Ok(num) => println!("Final shared count: {}", *num),
+        Err(poisoned) => println!("Mutex poisoned, recovered count: {}", *poisoned.into_inner()),
+    }
 }

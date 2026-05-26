@@ -1,3 +1,10 @@
+/// This example demonstrates the use of lifetimes in Rust.
+/// We define a struct `LogError` that holds a reference
+/// to a string slice. The `parse_log` function takes a
+/// string input and returns a vector of `LogError`
+/// instances, filtering for lines that contain "ERROR".
+/// The main function creates a sample log string and prints
+/// out the parsed errors.
 pub struct LogError<'a> {
     pub code: u32,
     pub message: &'a str,

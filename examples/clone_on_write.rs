@@ -20,12 +20,20 @@ fn main() {
     let user1 = "FerrisTheCrab";
     let result1 = sanitize_username(user1);
 
-    println!("Result 1: {} (Allocated: {})", result1, matches!(result1, Cow::Owned(_)));
+    println!(
+        "Result 1: {} (Allocated: {})",
+        result1,
+        matches!(result1, Cow::Owned(_))
+    );
 
     // Case 2: The input needs cleaning.
     // A new String is allocated and owned by `result2`.
     let user2 = "Ferris The Crab";
     let result2 = sanitize_username(user2);
 
-    println!("Result 2: {} (Allocated: {})", result2, matches!(result2, Cow::Owned(_)));
+    println!(
+        "Result 2: {} (Allocated: {})",
+        result2,
+        matches!(result2, Cow::Owned(_))
+    );
 }

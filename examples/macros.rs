@@ -33,8 +33,8 @@ macro_rules! newtype {
 
 macro_rules! reminder {
     ($message:expr) => {
-           println!("REMINDER: {}", $message);
-       };
+        println!("REMINDER: {}", $message);
+    };
 }
 
 newtype!(UserId, u32);

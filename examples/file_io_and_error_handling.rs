@@ -16,8 +16,8 @@ fn process_config<P: AsRef<Path>>(path: P) -> MyResult<()> {
     Ok(())
 }
 
-fn main () {
-    let path="config.txt";
+fn main() {
+    let path = "config.txt";
 
     if let Err(e) = process_config(path) {
         eprintln!("Error processing config file: {}", e);

@@ -11,7 +11,8 @@ pub struct LogError<'a> {
 }
 
 fn parse_log<'a>(input: &'a str) -> Vec<LogError<'a>> {
-    input.lines()
+    input
+        .lines()
         .filter(|line| line.contains("ERROR"))
         .map(|line| {
             let parts: Vec<&str> = line.split(':').collect();
@@ -24,7 +25,8 @@ fn parse_log<'a>(input: &'a str) -> Vec<LogError<'a>> {
 }
 
 fn main() {
-    let log_data = String::from("404: File not found\n200: OK\n500: ERROR Server Meltdown\n403: Forbidden\n");
+    let log_data =
+        String::from("404: File not found\n200: OK\n500: ERROR Server Meltdown\n403: Forbidden\n");
 
     let errors = parse_log(&log_data);
 

@@ -10,7 +10,8 @@ pub struct HashResult {
 }
 
 fn compute_hashes_parallel(files: Vec<PathBuf>) -> Vec<HashResult> {
-    files.into_par_iter()
+    files
+        .into_par_iter()
         .map(|path| {
             // Simulate hash computation (replace with actual hash logic)
             let mock_hash = format!("hash_of_{:?}", path);
@@ -20,7 +21,6 @@ fn compute_hashes_parallel(files: Vec<PathBuf>) -> Vec<HashResult> {
             }
         })
         .collect()
-
 }
 
 fn main() {

@@ -25,7 +25,7 @@ impl<T, O, E> Summary for T
 where
     T: Transformer<Output = Result<O, E>>,
     O: std::fmt::Display,
-    E: std::fmt::Display
+    E: std::fmt::Display,
 {
     // We can use the input parameter dynamically!
     fn summarize(&self, input: &str) -> String {

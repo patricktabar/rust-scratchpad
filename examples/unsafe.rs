@@ -12,9 +12,7 @@ unsafe extern "C" {
 pub fn get_c_string_length(s: &str) -> usize {
     let c_str = CString::new(s).expect("CString::new failed");
 
-    unsafe {
-        strlen(c_str.as_ptr())
-    }
+    unsafe { strlen(c_str.as_ptr()) }
 }
 
 fn main() {

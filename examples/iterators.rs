@@ -1,11 +1,10 @@
 /// This example demonstrates how to use iterators to process files
 /// in a directory and filter them based on line count.
-
-use std::{path::{Path, PathBuf}};
+use std::path::{Path, PathBuf};
 
 pub struct FileReport {
     pub path: PathBuf,
-    pub line_count: u64
+    pub line_count: u64,
 }
 
 pub fn get_large_files(dir: &Path, min_lines: u64) -> Vec<FileReport> {

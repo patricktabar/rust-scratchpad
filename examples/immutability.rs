@@ -1,7 +1,7 @@
+use std::cell::RefCell;
 /// This example demonstrates how to use Rc and RefCell
 /// to achieve interior mutability in Rust.
 use std::rc::Rc;
-use std::cell::RefCell;
 
 #[derive(Debug)]
 struct Config {

@@ -31,6 +31,12 @@ macro_rules! newtype {
     };
 }
 
+macro_rules! reminder {
+    ($message:expr) => {
+           println!("REMINDER: {}", $message);
+       };
+}
+
 newtype!(UserId, u32);
 newtype!(Username, String);
 
@@ -38,9 +44,14 @@ fn process_user(id: UserId, name: Username) {
     println!("Processing user: {} with ID: {}", name, id);
 }
 
+fn complicated_algorithm() {
+    reminder!("Need to implement the optimization phase 😃");
+}
+
 fn main() {
     let user_id = UserId(42);
     let username = Username("Alice".to_string());
 
     process_user(user_id, username);
+    complicated_algorithm();
 }

@@ -5,16 +5,15 @@
 /// the duration of the request processing.
 /// The `heavy_computation` handler simulates a time-consuming operation
 /// by sleeping for a specified duration before responding.
-
 use axum::{
     Router,
-    routing::get,
     body::Body,
     http::{Request, Response},
     middleware::{self, Next},
     response::IntoResponse,
+    routing::get,
 };
-use std::time::{Instant, Duration};
+use std::time::{Duration, Instant};
 
 #[tokio::main]
 async fn main() {
@@ -36,7 +35,6 @@ async fn heavy_computation() -> impl IntoResponse {
     tokio::time::sleep(timespan).await;
     format!("Computation complete in {} millis", timespan.as_millis())
 }
-
 
 async fn track_request_metrics(req: Request<Body>, next: Next) -> Response<Body> {
     let start_time = Instant::now();
